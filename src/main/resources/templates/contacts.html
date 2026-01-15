@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts - Am I Detained</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/dashboard">Am I Detained</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="/profile">Profile</a>
+                <a class="nav-link" href="/contacts">Contacts</a>
+                <a class="nav-link" href="/schedule">Schedule</a>
+                <a class="nav-link" href="/history">History</a>
+                <a class="nav-link" href="/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-4">
+        <h2>Emergency Contacts</h2>
+        
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Add New Contact</h5>
+                <form method="post" action="/contacts">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" name="alias" placeholder="Alias" required>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="tel" class="form-control" name="phoneNumber" placeholder="Phone Number" required>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="email" class="form-control" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary w-100">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Alias</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="contact : ${contacts}">
+                    <td th:text="${contact.alias}"></td>
+                    <td th:text="${contact.phoneNumber}"></td>
+                    <td th:text="${contact.email}"></td>
+                    <td>
+                        <form method="post" th:action="@{/contacts/{id}/delete(id=${contact.id})}" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

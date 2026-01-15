@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Elastic Beanstalk Configuration Files
+# These contain environment-specific settings
+# DO NOT commit actual secrets - use AWS Console or Secrets Manager
+.ebextensions/02-oauth-secrets.config
+.ebextensions/03-database.config
