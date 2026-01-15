@@ -132,7 +132,7 @@ Update your OAuth app settings with the Elastic Beanstalk URL:
 #### First Deployment (Manual)
 ```bash
 # Build the application
-./gradlew build -x test
+./gradlew clean build -x test
 
 # Create deployment package
 mkdir -p deploy
@@ -146,7 +146,7 @@ cd ..
 aws elasticbeanstalk create-application-version \
   --application-name am-i-detained \
   --version-label v1 \
-  --source-bundle S3Bucket=elasticbeanstalk-us-east-1-YOUR_ACCOUNT_ID,S3Key=deploy.zip \
+  --source-bundle S3Bucket=elasticbeanstalk-us-east-1-512978621387,S3Key=deploy.zip \
   --region us-east-1
 
 aws elasticbeanstalk update-environment \
