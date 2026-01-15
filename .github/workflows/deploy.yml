@@ -26,7 +26,8 @@ jobs:
       - name: Generate deployment package
         run: |
           mkdir -p deploy
-          cp build/libs/*.jar deploy/application.jar
+          # Use the fat JAR (not the plain JAR)
+          find build/libs -name "*-SNAPSHOT.jar" ! -name "*-plain.jar" -exec cp {} deploy/application.jar \;
           cp .ebextensions/* deploy/ 2>/dev/null || true
           cd deploy
           zip -r ../deploy.zip .
